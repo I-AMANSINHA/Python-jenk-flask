@@ -36,6 +36,7 @@ pipeline {
                 docker run -d \
                   --name ${CONTAINER_NAME} \
                   --restart unless-stopped \
+                  --env-file /opt/secrets/python-app.env \
                   -p 5002:5000 \
                   ${IMAGE_NAME}:${BUILD_NUMBER}
                 '''
