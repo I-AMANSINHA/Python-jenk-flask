@@ -1,51 +1,45 @@
 pipeline {
-agent any
+    agent any
 
-```
-environment {
-    IMAGE_NAME = "python-app"
-    CONTAINER_NAME = "python-app"
-}
-
-stages {
-
-    stage('Checkout') {
-        steps {
-            checkout scm
-
-            sh '''
-            echo "Latest Commit:"
-            git log -1 --pretty=format:"%h | %an | %s"
-            '''
-        }
+    environment {
+        IMAGE_NAME = "python-app"
+        CONTAINER_NAME = "python-app"
     }
 
-    stage('Build') {
-        steps {
-            sh '''
-            docker build \
-              -t ${IMAGE_NAME}:${BUILD_NUMBER} .
-            '''
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+
+                sh '''
+                echo "Latest Commit:"
+                git log -1 --pretty=format:"%h | %an | %s"
+                '''
+            }
         }
-    }
 
-    stage('Deploy') {
-        steps {
-            sh '''
-            docker rm -f ${CONTAINER_NAME} || true
+        stage('Build') {
+            steps {
+                sh '''
+                docker build \
+                  -t ${IMAGE_NAME}:${BUILD_NUMBER} .
+                '''
+            }
+        }
 
-            docker run -d \
-              --name ${CONTAINER_NAME} \
-              --restart unless-stopped \
-              -p 5002:5000 \
-              ${IMAGE_NAME}:${BUILD_NUMBER}
+        stage('Deploy') {
+            steps {
+                sh '''
+                docker rm -f ${CONTAINER_NAME} || true
 
-            docker ps | grep ${CONTAINER_NAME}
-            '''
+                docker run -d \
+                  --name ${CONTAINER_NAME} \
+                  --restart unless-stopped \
+                  -p 5002:5000 \
+                  ${IMAGE_NAME}:${BUILD_NUMBER}
+                '''
+            }
         }
     }
 }
-```
-
-}
-
