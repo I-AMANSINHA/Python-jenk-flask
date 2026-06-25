@@ -1,0 +1,15 @@
+# Ignore Git history
+.git
+.gitignore
+
+# Ignore Pipeline configuration
+Jenkinsfile
+
+# Ignore local runtime logs and cache
+
+__pycache__/
+*.pyc
+
+# Ignore documentation
+README.md
+
