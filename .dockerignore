@@ -7,7 +7,7 @@ Jenkinsfile
 
 # Ignore local runtime logs and cache
 
-__pycache__/
+__pycache__
 *.pyc
 
 # Ignore documentation
