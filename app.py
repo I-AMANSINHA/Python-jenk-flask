@@ -23,7 +23,7 @@ def before_request():
     g.start_time = time.time()
     try:
         g.db_conn = get_connection()
-        logger.debug("Database connection successfully established for request.")
+        logger.debug("Database connection successfully established for request. connected")
     except Exception as e:
         logger.error(f"Database connection initiation failed: {str(e)}")
         g.db_conn = None
