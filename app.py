@@ -79,6 +79,13 @@ def home():
         "version": version[0]
     })
 
+@app.route('/favicon.ico')
+def favicon():
+    # Returns an empty successful response to satisfy the browser
+    return '', 204
+
+
+
 @app.route("/health")
 def health():
     """Advanced health check that verifies the app AND the live DB path."""
