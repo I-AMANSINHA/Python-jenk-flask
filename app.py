@@ -88,7 +88,7 @@ def favicon():
 
 @app.route("/health")
 def health():
-    """Advanced health check that verifies the app AND the live DB path."""
+    """Advanced health that verifies the app AND the live DB path."""
     status_code = 200
     health_report = {"status": "UP", "database_connectivity": "OK"}
     
